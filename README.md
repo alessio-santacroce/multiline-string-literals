@@ -1,6 +1,6 @@
 # Multiline string literals in java
 This library provides an utility to define multiline string literals in java as described in this post http://blog.efftinge.de/2008/10/multi-line-string-literals-in-java.html <br />
-**The purpose it to make junit tests more readable** 
+**The purpose is to make junit tests more readable** 
 
 <br />
 > **Question 1** - How does it work?
