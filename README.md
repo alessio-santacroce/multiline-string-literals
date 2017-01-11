@@ -1,32 +1,37 @@
 # Multiline string literals in java
-This library provides an utility to define multiline string literals in java as described in this post http://blog.efftinge.de/2008/10/multi-line-string-literals-in-java.html <br />
-**The purpose is to make junit tests more readable** 
+This library provides an utility to define multiline string literals in java as described by Sven Efftinge in this [post](http://blog.efftinge.de/2008/10/multi-line-string-literals-in-java.html)
+ <br />
+The purpose is to make **junit tests more readable** when there are json, sql or xml strings.
 
 <br />
+> **Question 0** - How can I import this library?
+
+This library has been released on the central maven with [MIT license](https://en.wikipedia.org/wiki/MIT_License). 
+Simply add the dependency in your pom.xml:
+```xml
+<dependency>
+  <groupId>com.github.alessio-santacroce</groupId>
+  <artifactId>multiline-string-literals</artifactId>
+  <version>1.0.0</version>
+</dependency>
+```
+
 > **Question 1** - How does it work?
 
 The following code:
 ```java
 import static github.com.alessiosantacroce.multilinestring.MultilineStringLiteral.newString;
 System.out.println(newString(/*
-{
-    "firstName": "John",
-        "address": {
-            "streetAddress": "21 2nd Street",
-            "city": "New York"
-        }
-}
+      Wow, we finally have
+      multiline strings in
+      Java! HOOO!
 */));
 ```
 prints:
 ```
-{
-    "firstName": "John",
-        "address": {
-            "streetAddress": "21 2nd Street",
-            "city": "New York"
-        }
-}
+      Wow, we finally have
+      multiline strings in
+      Java! HOOO!
 ```
 
 <br />
