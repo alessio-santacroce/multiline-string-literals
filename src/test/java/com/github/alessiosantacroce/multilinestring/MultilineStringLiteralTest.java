@@ -1,4 +1,4 @@
-package github.com.alessiosantacroce.multilinestring.test;
+package com.github.alessiosantacroce.multilinestring;
 
 import org.junit.Test;
 

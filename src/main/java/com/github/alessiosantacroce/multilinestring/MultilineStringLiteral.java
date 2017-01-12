@@ -1,4 +1,4 @@
-package github.com.alessiosantacroce.multilinestring;
+package com.github.alessiosantacroce.multilinestring;
 
 import java.io.IOException;
 import java.io.InputStream;

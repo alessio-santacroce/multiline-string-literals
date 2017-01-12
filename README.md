@@ -1,5 +1,5 @@
 # Multiline string literals in java
-This library provides an utility to define multiline string literals in java as described by Sven Efftinge in this [post](http://blog.efftinge.de/2008/10/multi-line-string-literals-in-java.html)
+This library provides an utility to define multiline string literals in java as described by Sven Efftinge in this [post](http://blog.efftinge.de/2008/10/multi-line-string-literals-in-java.html).
  <br />
 The purpose is to make **junit tests more readable** when there are json, sql or xml strings.
 
@@ -20,7 +20,7 @@ Simply add the dependency in your pom.xml:
 
 The following code:
 ```java
-import static github.com.alessiosantacroce.multilinestring.MultilineStringLiteral.newString;
+import static com.github.alessiosantacroce.multilinestring.MultilineStringLiteral.newString;
 System.out.println(newString(/*
       Wow, we finally have
       multiline strings in
@@ -59,7 +59,13 @@ If you use maven, simply add to the pom.xml (e.g.: see [pom.xml](pom.xml#L42))
 ```
 
 <br />
-> **Question 5** - Fantastic, that works just fine. But it is still an hack, not a clean solution! Which alternatives do I have?
+> **Question 5** - Can I see a sample of a test written with this library?
+
+Of course... see: [MultilineStringLiteralTest.java](src/test/java/com/github/alessiosantacroce/multilinestring/MultilineStringLiteralTest.java)
+
+
+<br />
+> **Question 6** - Fantastic, that works just fine. But it is still an hack, not a clean solution! Which alternatives do I have?
 
 Unfortunately java doesn't provide a good support for multiline string literal. Here are some alternatives to make your code more readable.
 
@@ -79,4 +85,4 @@ final String json = Json.createObjectBuilder()
         .toString();
 ```
 - Consider writing your test with another language supported by the JVM like scala or kotlin.
-- Check this other implementation for multiline string literals using javadoc comments: https://github.com/benelog/multiline
+- Check out this other implementation for multiline string literals using javadoc comments: https://github.com/benelog/multiline
