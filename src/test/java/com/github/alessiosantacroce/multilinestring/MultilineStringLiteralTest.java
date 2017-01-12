@@ -4,8 +4,8 @@ import org.junit.Test;
 
 import java.util.function.Supplier;
 
-import static github.com.alessiosantacroce.multilinestring.MultilineStringLiteral.S;
-import static github.com.alessiosantacroce.multilinestring.MultilineStringLiteral.newString;
+import static com.github.alessiosantacroce.multilinestring.MultilineStringLiteral.S;
+import static com.github.alessiosantacroce.multilinestring.MultilineStringLiteral.newString;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class MultilineStringLiteralTest {
