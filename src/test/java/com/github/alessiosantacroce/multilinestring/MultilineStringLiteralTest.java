@@ -16,7 +16,6 @@ public class MultilineStringLiteralTest {
     public void defineMultiLineJsonString() throws ParseException {
         // given
         final JSONParser parser = new JSONParser();
-
         final JSONObject person = new JSONObject();
         person.put("name", "John");
         person.put("hobbies", Arrays.asList("travel", "make pizza"));
