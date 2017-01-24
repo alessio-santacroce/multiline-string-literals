@@ -111,15 +111,6 @@ Unfortunately java doesn't provide a good support for multiline string literal. 
 ```java
 final String s = "{ 'name': 'John' }".replace('\'', '"');
 ```
-- If you need to instantiate json or xml string, you could use a library like:
-```java
-final String json = Json.createObjectBuilder()
-        .add("firstName", "John")
-        .add("address", Json.createObjectBuilder()
-                .add("streetAddress", "21 2nd Street")
-                .add("city", "New York")
-        .build()
-        .toString();
-```
+- If you need to instantiate json or xml string, you could use a library: [example1](https://docs.oracle.com/javaee/7/api/javax/json/JsonObjectBuilder.html), [example2](src/test/java/com/github/alessiosantacroce/multilinestring/MultilineStringLiteralTest.java#18)
 - Consider writing your test with another language supported by the JVM like scala or kotlin.
 - Check out this other implementation for multiline string literals using javadoc comments: https://github.com/benelog/multiline
