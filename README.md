@@ -71,34 +71,6 @@ Java! HOOO!
 </tr>
 </table>
 
-The following code
-```java
-System.out.println(MultilineStringLiteral.newString(/*
-      Wow, we finally have
-      multiline strings in
-      Java! HOOO!
-*/));
-```
-prints
-```
-      Wow, we finally have
-      multiline strings in
-      Java! HOOO!
-```
-and, similarly to scala or groovy, _stripMargin_
-```java
-System.out.println(MultilineStringLiteral.stripMargin(/*
-      |Wow, we finally have
-      multiline strings in
-      |Java! HOOO!
-*/));
-```
-prints
-```
-Wow, we finally have
-      multiline strings in
-Java! HOOO!
-```
 <br />
 > **Question 2** - What the hell! A comment is given as parameter to a method?
 
