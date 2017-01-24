@@ -61,7 +61,7 @@ println """
       |Wow, we finally have
       multiline strings in
       |Java! HOOO!
-""". stripMargin
+""".stripMargin
 </code></pre></td>
 <td><pre>
 Wow, we finally have
