@@ -12,28 +12,40 @@ Simply add the dependency in your pom.xml:
 <dependency>
   <groupId>com.github.alessio-santacroce</groupId>
   <artifactId>multiline-string-literals</artifactId>
-  <version>1.0.0</version>
+  <version>1.0.1</version>
 </dependency>
 ```
 
 > **Question 1** - How does it work?
 
-The following code:
+The following code
 ```java
-import static com.github.alessiosantacroce.multilinestring.MultilineStringLiteral.newString;
-System.out.println(newString(/*
+System.out.println(MultilineStringLiteral.newString(/*
       Wow, we finally have
       multiline strings in
       Java! HOOO!
 */));
 ```
-prints:
+prints
 ```
       Wow, we finally have
       multiline strings in
       Java! HOOO!
 ```
-
+and, similarly to scala or groovy, _stripMargin_
+```java
+System.out.println(MultilineStringLiteral.stripMargin(/*
+      |Wow, we finally have
+      multiline strings in
+      |Java! HOOO!
+*/));
+```
+prints
+```
+Wow, we finally have
+      multiline strings in
+Java! HOOO!
+```
 <br />
 > **Question 2** - What the hell! A comment is given as parameter to a method?
 
@@ -49,7 +61,7 @@ It opens the java source file and reads the comment at the given line.
 > **Question 4** - So... java source files have to be available at runtime!
 
 Yep. Since the purpose to this library is for junit test, it shouldn't be an issue adding test source files to the jar.
-If you use maven, simply add to the pom.xml (e.g.: see [pom.xml](pom.xml#L42))
+If you use maven, simply add to the pom.xml (e.g.: see [pom.xml](pom.xml#L55))
 ```xml
 <testResources>
     <testResource>

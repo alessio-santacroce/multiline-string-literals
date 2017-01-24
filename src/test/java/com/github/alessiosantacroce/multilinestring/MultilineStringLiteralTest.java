@@ -1,24 +1,146 @@
 package com.github.alessiosantacroce.multilinestring;
 
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.junit.Test;
 
-import java.util.function.Supplier;
+import java.util.Arrays;
 
-import static com.github.alessiosantacroce.multilinestring.MultilineStringLiteral.S;
-import static com.github.alessiosantacroce.multilinestring.MultilineStringLiteral.newString;
+import static com.github.alessiosantacroce.multilinestring.MultilineStringLiteral.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class MultilineStringLiteralTest {
+
+    @Test
+    public void defineMultiLineJsonString() throws ParseException {
+        // given
+        final JSONParser parser = new JSONParser();
+
+        final JSONObject person = new JSONObject();
+        person.put("name", "John");
+        person.put("hobbies", Arrays.asList("travel", "make pizza"));
+        final JSONObject address = new JSONObject();
+        address.put("streetAddress", "21 2nd Street");
+        address.put("city", "New York");
+        person.put("address", address);
+
+        // when
+
+        // then
+        assertThat(parser.parse(newString(/*
+         {
+            "name": "John",
+            "hobbies": ["travel", "make pizza"],
+            "address": {
+              "streetAddress": "21 2nd Street",
+              "city": "New York"
+            }
+          }
+         */))).isEqualTo(person);
+        assertThat(parser.parse(newString(/**
+         {
+         "name": "John",
+         "hobbies": ["travel", "make pizza"],
+         "address": {
+         "streetAddress": "21 2nd Street",
+         "city": "New York"
+         }
+         }
+         */))).isEqualTo(person);
+        assertThat(parser.parse(S(/*
+         {
+            "name": "John",
+            "hobbies": ["travel", "make pizza"],
+             "address": {
+                 "streetAddress": "21 2nd Street",
+                  "city": "New York"
+             }
+         }
+         */))).isEqualTo(person);
+        assertThat(parser.parse(S(/**
+         {
+         "name": "John",
+         "hobbies": ["travel", "make pizza"],
+         "address": {
+         "streetAddress": "21 2nd Street",
+         "city": "New York"
+         }
+         }
+         */))).isEqualTo(person);
+        assertThat(parser.parse(stripMargin(/*
+         | {
+         |   "name": "John",
+         |   "hobbies": ["travel", "make pizza"],
+         |   "address": {
+         |     "streetAddress": "21 2nd Street",
+         |     "city": "New York"
+         |   }
+         | }
+         */))).isEqualTo(person);
+        assertThat(parser.parse(stripMargin(/**
+         | {
+         |   "name": "John",
+         |   "hobbies": ["travel", "make pizza"],
+         |   "address": {
+         |     "streetAddress": "21 2nd Street",
+         |     "city": "New York"
+         |   }
+         | }
+         */))).isEqualTo(person);
+    }
+
+    @Test
+    public void defineMultiLineString() throws ParseException {
+        // given
+        final String expected = "\n" +
+                "         Wow, we finally have\n" +
+                "         multiline strings in\n" +
+                "         Java! HOOO!";
+
+        // when
+
+        // then
+        assertThat(newString(/*
+         Wow, we finally have
+         multiline strings in
+         Java! HOOO!*/)).isEqualTo(expected);
+        assertThat(newString(/**
+         Wow, we finally have
+         multiline strings in
+         Java! HOOO!*/)).isEqualTo(expected);
+        assertThat(S(/*
+         Wow, we finally have
+         multiline strings in
+         Java! HOOO!*/)).isEqualTo(expected);
+        assertThat(S(/**
+         Wow, we finally have
+         multiline strings in
+         Java! HOOO!*/)).isEqualTo(expected);
+        assertThat(stripMargin(/*
+         |         Wow, we finally have
+         |         multiline strings in
+         |         Java! HOOO!*/)).isEqualTo(expected);
+        assertThat(stripMargin(/**
+         |         Wow, we finally have
+         |         multiline strings in
+         |         Java! HOOO!*/)).isEqualTo(expected);
+
+    }
 
     @Test
     public void defineEmptyString() {
         // given
 
         // when
-        final String s = newString(/**/);
 
         // then
-        assertThat(s).isEqualTo("");
+        assertThat(newString(/**/)).isEqualTo("");
+        assertThat(newString(/***/)).isEqualTo("");
+        assertThat(S(/**/)).isEqualTo("");
+        assertThat(S(/***/)).isEqualTo("");
+        assertThat(stripMargin(/**/)).isEqualTo("");
+        assertThat(stripMargin(/***/)).isEqualTo("");
     }
 
     @Test
@@ -26,88 +148,55 @@ public class MultilineStringLiteralTest {
         // given
 
         // when
-        final String s = S(/* xxx */);
 
         // then
-        assertThat(s).isEqualTo(" xxx ");
+        assertThat(newString(/*111*/)).isEqualTo("111");
+        assertThat(newString(/**222*/)).isEqualTo("222");
+        assertThat(S(/*333*/)).isEqualTo("333");
+        assertThat(S(/**444*/)).isEqualTo("444");
+        assertThat(stripMargin(/*555*/)).isEqualTo("555");
+        assertThat(stripMargin(/**666*/)).isEqualTo("666");
     }
 
-    @Test
-    public void defineMultiLineJsonString() {
-        // given
-
-        // when
-        final String s = newString(/*
-            {
-                "firstName": "John",
-                "address": {
-                    "streetAddress": "21 2nd Street",
-                    "city": "New York"
-                }
-            }
-        */);
-
-        // then
-        assertThat(s.trim()).isEqualTo("{\n" +
-                "                \"firstName\": \"John\",\n" +
-                "                \"address\": {\n" +
-                "                    \"streetAddress\": \"21 2nd Street\",\n" +
-                "                    \"city\": \"New York\"\n" +
-                "                }\n" +
-                "            }");
+    @Test(expected = MultilineStringLiteralException.class)
+    public void ifCommentIsMissingRaiseException_S() {
+        S();
     }
 
-    @Test
-    public void defineMultiLineXMLString() {
-        // given
+    @Test(expected = MultilineStringLiteralException.class)
+    public void ifCommentIsMissingRaiseException_newString() {
+        newString();
+    }
 
-        // when
-        final String s = S(/*
-            <person id="42">
-                <firstName>John</firstName>
-                <address>
-                    <streetAddress>21 2nd Street</streetAddress>
-                    <city>New York</city>
-                </address>
-            </person>
-        */);
-
-        // then
-        assertThat(s.trim()).isEqualTo("<person id=\"42\">\n" +
-                "                <firstName>John</firstName>\n" +
-                "                <address>\n" +
-                "                    <streetAddress>21 2nd Street</streetAddress>\n" +
-                "                    <city>New York</city>\n" +
-                "                </address>\n" +
-                "            </person>");
+    @Test(expected = MultilineStringLiteralException.class)
+    public void ifCommentIsMissingRaiseException_stripMargin() {
+        stripMargin();
     }
 
     @Test
     public void defineStringInInnerClass() {
         // given
-        final Object obj = new Object() {
+
+        // when
+
+        // then
+        assertThat(new Object() {
             @Override
             public String toString() {
-                return S(/* yyy */);
+                return S(/* aaa */);
             }
-        };
-
-        // when
-        final String s = obj.toString();
-
-        // then
-        assertThat(s).isEqualTo(" yyy ");
-    }
-
-    @Test
-    public void defineStringInFunction() {
-        // given
-        final Supplier<String> supplier = () -> S(/* zzz */);
-
-        // when
-        final String s = supplier.get();
-
-        // then
-        assertThat(s).isEqualTo(" zzz ");
+        }.toString()).isEqualTo(" aaa ");
+        assertThat(new Object() {
+            @Override
+            public String toString() {
+                return newString(/* bbb */);
+            }
+        }.toString()).isEqualTo(" bbb ");
+        assertThat(new Object() {
+            @Override
+            public String toString() {
+                return stripMargin(/*|ccc */);
+            }
+        }.toString()).isEqualTo("ccc ");
     }
 }
