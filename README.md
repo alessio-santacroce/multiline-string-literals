@@ -2,8 +2,8 @@
 This library provides an utility to define multiline string literals in java as described by Sven Efftinge in this [post](http://blog.efftinge.de/2008/10/multi-line-string-literals-in-java.html).
  <br />
 The purpose is to make **junit tests more readable** when there are json, sql or xml strings.
+__________
 
-<br />
 > **Question 0** - How can I import this library?
 
 This library has been released on the central maven with [MIT license](https://en.wikipedia.org/wiki/MIT_License). 
