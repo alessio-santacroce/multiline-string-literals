@@ -107,7 +107,7 @@ Of course... see: [MultilineStringLiteralTest.java](src/test/java/com/github/ale
 Unfortunately java doesn't provide a good support for multiline string literal. Here are some alternatives to make your code more readable.
 
 - Explicitly load the string from an external file
-- If you need to instantiate json or xml string, you could use a library: [example1](https://docs.oracle.com/javaee/7/api/javax/json/JsonObjectBuilder.html), [example2](src/test/java/com/github/alessiosantacroce/multilinestring/MultilineStringLiteralTest.java#L18)
+- If you need to instantiate json or xml string, you could use a library: [example1](https://docs.oracle.com/javaee/7/api/javax/json/JsonObjectBuilder.html), [example2](src/test/java/com/github/alessiosantacroce/multilinestring/MultilineStringLiteralTest.java#L19)
 - Consider writing your test with another language supported by the JVM like scala or kotlin.
 - Check out this other implementation for multiline string literals using javadoc comments: https://github.com/benelog/multiline
 - If what you need is simply to use a special character, you might consider to use the replace method:
