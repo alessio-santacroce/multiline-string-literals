@@ -18,6 +18,59 @@ Simply add the dependency in your pom.xml:
 
 > **Question 1** - How does it work?
 
+<table>
+<tr>
+<td><b>Usage sample</b></td>
+<td><b>Groovy equivalent</b></td>
+<td><b>Result</b></td>
+</tr>
+<tr>
+<td><pre><code>
+System.out.println(newString(/*
+      Wow, we finally have
+      multiline strings in
+      Java! HOOO!
+*/));
+</code></pre></td>
+<td><pre><code>
+println """
+      Wow, we finally have
+      multiline strings in
+      Java! HOOO!
+"""
+</code></pre></td>
+<td><pre>
+      Wow, we finally have
+      multiline strings in
+      Java! HOOO!
+</pre></td>
+</tr>
+
+
+
+<tr>
+<td><pre><code>
+System.out.println(stripMargin(/*
+      |Wow, we finally have
+      multiline strings in
+      |Java! HOOO!
+*/));
+</code></pre></td>
+<td><pre><code>
+println """
+      |Wow, we finally have
+      multiline strings in
+      |Java! HOOO!
+"""
+</code></pre></td>
+<td><pre>
+Wow, we finally have
+      multiline strings in
+Java! HOOO!
+</pre></td>
+</tr>
+</table>
+
 The following code
 ```java
 System.out.println(MultilineStringLiteral.newString(/*
