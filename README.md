@@ -12,7 +12,7 @@ Simply add the dependency in your pom.xml:
 <dependency>
   <groupId>com.github.alessio-santacroce</groupId>
   <artifactId>multiline-string-literals</artifactId>
-  <version>1.0.1</version>
+  <version>1.1.0</version>
 </dependency>
 ```
 
